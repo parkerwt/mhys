@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>周易·数字通行本 2.0 专业版</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1 class="page-title">周易·数字通行本</h1>
+
+    <div class="app-container">
+      <div class="divine-side">
+        <input
+          type="text"
+          id="wish"
+          placeholder="点击输入心中所求之事..."
+          maxlength="50"
+          autocomplete="off"
+          spellcheck="false"
+          oncompositionstart="handleCompositionStart()"
+          oncompositionend="handleCompositionEnd()"
+        />
+        <div id="inputError" class="input-error"></div>
+        <div id="hint" class="step-hint">
+          凝神静虑，输入所求，启卦获取【内卦】
+        </div>
+
+        <div class="pointer">▼</div>
+
+        <div class="disk-wrapper" id="diskWrapper">
+          <canvas id="diskOuter" width="350" height="350"></canvas>
+          <canvas id="diskInner" width="210" height="210"></canvas>
+        </div>
+
+        <button id="spinBtn" class="main-action-btn" onclick="run()">
+          启 卦
+        </button>
+
+        <div class="divine-footer">
+          <div class="divine-decoration">
+            <span class="decoration-text">道法自然 · 静待天机</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-side" id="display">
+        <div id="welcome" class="welcome-view">
+          <div class="welcome-bg">易</div>
+          <div class="welcome-content">
+            <h2 class="welcome-title">澄心定虑 · 启灵感应</h2>
+            <p class="welcome-subtitle" id="welcomeSubtitle">
+              请于左侧输入所求之事，拨动转盘以窥天机
+            </p>
+
+            <div class="guide-steps">
+              <div class="step-item">
+                <span class="step-num">01</span>
+                <p>凝神思考所求之事</p>
+              </div>
+              <div class="step-item">
+                <span class="step-num">02</span>
+                <p>输入关键词启动内卦</p>
+              </div>
+              <div class="step-item">
+                <span class="step-num">03</span>
+                <p>旋转外盘完成卦象</p>
+              </div>
+            </div>
+
+            <div class="wisdom-quote">
+              <p id="quoteText">「天行健，君子以自强不息。」</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="mainContent" style="display: none">
+          <div class="wish-display">
+            <span class="wish-label">所求之事</span>
+            <span class="wish-text" id="wishDisplay"></span>
+          </div>
+
+          <div class="gua-header">
+            <div class="title-group">
+              <h2 class="gua-title" id="gName">--</h2>
+              <div class="gua-meta" id="gMeta">--</div>
+            </div>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">
+              ✅ 一键复制卦辞
+            </button>
+            <div class="copy-hint">💡 复制卦辞到常用的AI软件中解卦</div>
+          </div>
+
+          <div class="gua-comparison">
+            <div class="gua-box">
+              <span class="sub-label">本卦 (现状)</span>
+              <div class="hexagram" id="gGraphic"></div>
+            </div>
+            <div class="gua-arrow">➔</div>
+            <div class="gua-box">
+              <span class="sub-label">互卦 (过程)</span>
+              <div class="hexagram" id="iGraphic"></div>
+            </div>
+            <div class="gua-arrow">➔</div>
+            <div class="gua-box">
+              <span class="sub-label">之卦 (结果)</span>
+              <div class="hexagram" id="zGraphic"></div>
+            </div>
+          </div>
+
+          <div class="text-block">
+            <span class="badge moving-badge">动态推演</span>
+            <div
+              class="text-body"
+              id="mText"
+              style="font-weight: bold; color: var(--red)"
+            >
+              正在分析爻位变动...
+            </div>
+          </div>
+
+          <div class="text-block">
+            <span class="badge">本卦卦辞</span>
+            <div class="text-body" id="gJudge"></div>
+          </div>
+
+          <div id="zhiGuaDetails"></div>
+
+          <div class="content-footer">
+            <div class="content-decoration">
+              <span class="decoration-text">知易行难 · 慎思明辨</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="data-provider.js"></script>
+    <script src="script.js"></script>
+    <script>
+      // 数据加载和初始化
+      async function initializeApp() {
+        try {
+          // 显示加载状态
+          const spinBtn = document.getElementById("spinBtn");
+          const originalText = spinBtn.innerText;
+          spinBtn.innerText = "加载中...";
+          spinBtn.disabled = true;
+
+          // 加载所有数据
+          await window.dataProvider.loadAllData();
+
+          // 初始化BASES数据
+          if (typeof initializeBaseData === "function") {
+            initializeBaseData();
+          }
+
+          // 数据加载完成，启用按钮
+          spinBtn.innerText = originalText;
+          spinBtn.disabled = false;
+
+          // 数据加载完成，应用已就绪
+        } catch (error) {
+          console.error("数据加载失败:", error);
+          const spinBtn = document.getElementById("spinBtn");
+          spinBtn.innerText = "加载失败";
+          spinBtn.style.background =
+            "linear-gradient(135deg, #dc3545 0%, #c82333 100%)";
+
+          // 显示错误提示
+          const errorDiv = document.createElement("div");
+          errorDiv.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            text-align: center;
+            z-index: 1000;
+          `;
+          errorDiv.innerHTML = `
+            <h3 style="color: #dc3545; margin: 0 0 10px 0;">数据加载失败</h3>
+            <p style="margin: 0 0 15px 0;">请检查网络连接或刷新页面重试</p>
+            <button onclick="location.reload()" style="
+              background: #007bff;
+              color: white;
+              border: none;
+              padding: 8px 16px;
+              border-radius: 4px;
+              cursor: pointer;
+            ">重新加载</button>
+          `;
+          document.body.appendChild(errorDiv);
+        }
+      }
+
+      // 页面加载完成后初始化
+      document.addEventListener("DOMContentLoaded", initializeApp);
+    </script>
+  </body>
+</html>
