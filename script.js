@@ -748,3 +748,24 @@ function copyToClipboard() {
       }
     });
 }
+
+// 找到脚本中的 .then(() => { ... }) 块
+window.dataProvider.loadAllData().then(() => {
+  // 1. 原有的初始化逻辑
+  initializeBaseData();
+  isDataLoaded = true;
+
+  const spinBtn = document.getElementById("spinBtn");
+  spinBtn.innerText = "启卦（下卦）";
+  spinBtn.disabled = false;
+
+  // 2. 添加移除遮罩逻辑
+  const overlay = document.getElementById("loadingOverlay");
+  if (overlay) {
+    overlay.classList.add("hidden");
+    // 动画结束后从 DOM 中彻底移除，优化性能
+    setTimeout(() => {
+      overlay.style.display = "none";
+    }, 800);
+  }
+});
