@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>周易·数字通行本 2.0 专业版</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preload" href="data-provider.js" as="script" />
+    <link rel="preload" href="script.js" as="script" />
+  </head>
+  <body>
+    <div id="loadingOverlay" class="loading-overlay">
+      <div class="loading-content">
+        <div class="taiji-loader" id="loaderBagua"></div>
+        <div class="loading-text">正在推演天机...</div>
+        <div class="loading-subtext">天行健，君子以自强不息</div>
+      </div>
+    </div>
+
+    <h1 class="page-title">周易·数字通行本</h1>
+
+    <main class="app-container">
+      <section class="divine-side">
+        <div class="input-group">
+          <input
+            type="text"
+            id="wish"
+            placeholder="点击输入心中所求之事..."
+            maxlength="50"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <div id="inputError" class="input-error"></div>
+        </div>
+
+        <div id="hint" class="step-hint">
+          凝神静虑，输入所求，启卦获取【内卦】
+        </div>
+        <div class="pointer">▼</div>
+
+        <div class="disk-wrapper" id="diskWrapper">
+          <canvas id="diskOuter"></canvas>
+          <div class="inner-disk-container">
+            <canvas id="diskInner"></canvas>
+          </div>
+        </div>
+
+        <button id="spinBtn" class="main-action-btn" disabled>加载中...</button>
+
+        <footer class="divine-footer">
+          <div class="divine-decoration">
+            <span class="decoration-text">道法自然 · 静待天机</span>
+          </div>
+        </footer>
+      </section>
+
+      <section class="content-side" id="display">
+        <div id="welcome" class="welcome-view">
+          <div class="welcome-bg">易</div>
+          <div class="welcome-content">
+            <h2 class="welcome-title">澄心定虑 · 启灵感应</h2>
+            <p class="welcome-subtitle" id="welcomeSubtitle">
+              请于左侧输入所求之事，拨动转盘以窥天机
+            </p>
+            <div class="guide-steps">
+              <div class="step-item">
+                <span class="step-num">01</span>
+                <p>凝神思考所求之事</p>
+              </div>
+              <div class="step-item">
+                <span class="step-num">02</span>
+                <p>输入关键词启动内卦</p>
+              </div>
+              <div class="step-item">
+                <span class="step-num">03</span>
+                <p>旋转外盘完成卦象</p>
+              </div>
+            </div>
+            <div class="wisdom-quote">
+              <p id="quoteText">「天行健，君子以自强不息。」</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="mainContent" class="hidden">
+          <div class="wish-display">
+            <span class="wish-label">所求之事</span>
+            <span class="wish-text" id="wishDisplay"></span>
+          </div>
+
+          <header class="gua-header">
+            <div class="title-group">
+              <h2 class="gua-title" id="gName">--</h2>
+              <div class="gua-meta" id="gMeta">--</div>
+            </div>
+            <div class="action-group">
+              <button class="copy-btn" id="copyBtn">✅ 一键复制卦辞</button>
+              <div class="copy-hint">💡 复制卦辞到常用的AI软件中解卦</div>
+            </div>
+          </header>
+
+          <div class="gua-comparison">
+            <div class="gua-box">
+              <span class="sub-label">本卦 (现状)</span>
+              <div class="hexagram" id="gGraphic"></div>
+            </div>
+            <div class="gua-arrow icon-arrow">➔</div>
+            <div class="gua-box">
+              <span class="sub-label">互卦 (过程)</span>
+              <div class="hexagram" id="iGraphic"></div>
+            </div>
+            <div class="gua-arrow icon-arrow">➔</div>
+            <div class="gua-box">
+              <span class="sub-label">之卦 (结果)</span>
+              <div class="hexagram" id="zGraphic"></div>
+            </div>
+          </div>
+
+          <div class="text-block">
+            <span class="badge moving-badge">动态推演</span>
+            <div
+              class="text-body"
+              id="mText"
+              style="font-weight: bold; color: var(--red)"
+            >
+              正在分析爻位变动...
+            </div>
+          </div>
+
+          <div class="text-block">
+            <span class="badge">本卦卦辞</span>
+            <div class="text-body" id="gJudge"></div>
+          </div>
+
+          <div id="zhiGuaDetails"></div>
+
+          <footer class="content-footer">
+            <div class="content-decoration">
+              <span class="decoration-text">知易行难 · 慎思明辨</span>
+            </div>
+          </footer>
+        </div>
+      </section>
+    </main>
+
+    <script src="data-provider.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

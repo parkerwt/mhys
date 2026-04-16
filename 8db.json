@@ -1,0 +1,164 @@
+{
+  "eight_trigrams": [
+    {
+      "id": 1,
+      "name": "乾",
+      "pinyin": "Qián",
+      "symbol": "☰",
+      "nature": "天",
+      "element": "金",
+      "binary": "111",
+      "decimal": 7,
+      "line_structure": ["阳", "阳", "阳"],
+      "ui_style": {
+        "primary_color": "金色",
+        "hex": "#FFD700",
+        "text_color": "#000000"
+      },
+      "attributes": {
+        "meaning": "刚健、主导、创造、动力",
+        "traits": ["决断", "强力", "高远", "刚性"]
+      }
+    },
+    {
+      "id": 2,
+      "name": "兑",
+      "pinyin": "Duì",
+      "symbol": "☱",
+      "nature": "泽",
+      "element": "金",
+      "binary": "110",
+      "decimal": 6,
+      "line_structure": ["阳", "阳", "阴"],
+      "ui_style": {
+        "primary_color": "银白",
+        "hex": "#E0E0E0",
+        "text_color": "#333333"
+      },
+      "attributes": {
+        "meaning": "喜悦、交流、滋养、表达",
+        "traits": ["轻柔", "愉悦", "感化", "开口"]
+      }
+    },
+    {
+      "id": 3,
+      "name": "离",
+      "pinyin": "Lí",
+      "symbol": "☲",
+      "nature": "火",
+      "element": "火",
+      "binary": "101",
+      "decimal": 5,
+      "line_structure": ["阳", "阴", "阳"],
+      "ui_style": {
+        "primary_color": "赤红",
+        "hex": "#FF4500",
+        "text_color": "#FFFFFF"
+      },
+      "attributes": {
+        "meaning": "光明、依附、热情、显现",
+        "traits": ["能量", "扩散", "明亮", "美丽"]
+      }
+    },
+    {
+      "id": 4,
+      "name": "震",
+      "pinyin": "Zhèn",
+      "symbol": "☳",
+      "nature": "雷",
+      "element": "木",
+      "binary": "100",
+      "decimal": 4,
+      "line_structure": ["阳", "阴", "阴"],
+      "ui_style": {
+        "primary_color": "碧绿",
+        "hex": "#00CF7F",
+        "text_color": "#FFFFFF"
+      },
+      "attributes": {
+        "meaning": "震动、爆发、执行、冲击",
+        "traits": ["果敢", "速度", "生机", "惊醒"]
+      }
+    },
+    {
+      "id": 5,
+      "name": "巽",
+      "pinyin": "Xùn",
+      "symbol": "☴",
+      "nature": "风",
+      "element": "木",
+      "binary": "011",
+      "decimal": 3,
+      "line_structure": ["阴", "阳", "阳"],
+      "ui_style": {
+        "primary_color": "深绿",
+        "hex": "#228B22",
+        "text_color": "#FFFFFF"
+      },
+      "attributes": {
+        "meaning": "柔顺、渗透、适应、不息",
+        "traits": ["谦逊", "包容", "多变", "进入"]
+      }
+    },
+    {
+      "id": 6,
+      "name": "坎",
+      "pinyin": "Kǎn",
+      "symbol": "☵",
+      "nature": "水",
+      "element": "水",
+      "binary": "010",
+      "decimal": 2,
+      "line_structure": ["阴", "阳", "阴"],
+      "ui_style": {
+        "primary_color": "墨黑",
+        "hex": "#1A1A1B",
+        "text_color": "#FFFFFF"
+      },
+      "attributes": {
+        "meaning": "深邃、险难、陷落、流动",
+        "traits": ["聪明", "隐忍", "变化", "坚韧"]
+      }
+    },
+    {
+      "id": 7,
+      "name": "艮",
+      "pinyin": "Gèn",
+      "symbol": "☶",
+      "nature": "山",
+      "element": "土",
+      "binary": "001",
+      "decimal": 1,
+      "line_structure": ["阴", "阴", "阳"],
+      "ui_style": {
+        "primary_color": "褐色",
+        "hex": "#8B4513",
+        "text_color": "#FFFFFF"
+      },
+      "attributes": {
+        "meaning": "静止、守拙、稳重、阻隔",
+        "traits": ["克制", "坚固", "诚信", "知止"]
+      }
+    },
+    {
+      "id": 8,
+      "name": "坤",
+      "pinyin": "Kūn",
+      "symbol": "☷",
+      "nature": "地",
+      "element": "土",
+      "binary": "000",
+      "decimal": 0,
+      "line_structure": ["阴", "阴", "阴"],
+      "ui_style": {
+        "primary_color": "土黄",
+        "hex": "#FFD300",
+        "text_color": "#333333"
+      },
+      "attributes": {
+        "meaning": "厚德、接纳、母性、承载",
+        "traits": ["稳定", "柔顺", "慈爱", "务实"]
+      }
+    }
+  ]
+}
